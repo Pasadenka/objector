@@ -1221,6 +1221,19 @@ var ps = (function () {
     return self;
 })();
 
+o.unidgen = function (lenght, spaces, separator) {
+
+    lenght = lenght?lenght:20;
+    spaces = spaces?spaces:1;
+    separator = separator?separator:"-";
+
+    var guid = "";
+    var spacePosition = Math.floor(lenght/spaces);
+    o.l.f(lenght,function(i){guid+="x";spaces>1&&(i+1)%spacePosition===0&&i+1<lenght&&(guid+=separator)});
+
+    return guid.replace(/[x]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+}
+
 requestAnimationFrame = ( function(callback) {
 
     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
